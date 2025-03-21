@@ -5,22 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Users")
-public class User {
+@Table(name = "clients")
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
 
-    @Column(name = "user_name")
+    @Column(name = "client_name")
     private String name;
+    private String surname;
+    private String phone;
+    private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Account> account = new ArrayList<>();
 
-    public User(){}
+    public Client(){}
 
-    public User(String name){
+    public Client(String name){  // , String surname, String phone, String email
         this.name = name;
     }
 

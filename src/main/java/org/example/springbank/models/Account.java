@@ -15,8 +15,8 @@ public class Account {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
     @Column(nullable = false)
     private double balance;
@@ -33,8 +33,8 @@ public class Account {
 
     public Account(){}
 
-    public Account(User user, double balance, CurrencyType currency){
-        this.user = user;
+    public Account(Client client, double balance, CurrencyType currency){
+        this.client = client;
         this.balance = balance;
         this.currency = currency;
     }
@@ -43,12 +43,12 @@ public class Account {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public Client getClient() {
+        return client;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public double getBalance() {
@@ -76,7 +76,7 @@ public class Account {
     @Override
     public String toString(){
         return "Account{id="+id+", " +
-                "user='"+user.getName()+"', " +
+                "client='"+client.getName()+"', " +
                 "balance="+balance+", " +
                 "currency="+currency+
                 "}";
