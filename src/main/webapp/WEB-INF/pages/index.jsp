@@ -61,9 +61,9 @@
           <tr>
             <td><input type="checkbox" name="toDelete[]" value="${client.id}" id="checkbox_${client.id}"/></td>
             <td>${client.name}</td>
-<%--            <td>${client.surname}</td>--%>
-<%--            <td>${client.phone}</td>--%>
-<%--            <td>${client.email}</td>--%>
+            <td>${client.surname}</td>
+            <td>${client.phone}</td>
+            <td>${client.email}</td>
 <%--            <c:choose>--%>
 <%--              <c:when test="${client.group ne null}">--%>
 <%--                <td>${client.group.name}</td>--%>

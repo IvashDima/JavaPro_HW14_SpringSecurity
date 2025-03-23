@@ -23,12 +23,18 @@ public class Client {
 
     public Client(){}
 
-    public Client(String name){  // , String surname, String phone, String email
+    public Client(String name, String surname, String phone, String email){
         this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.email = email;
     }
 
     public long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -39,9 +45,36 @@ public class Client {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     @Override
     public String toString(){
         return "Client{id="+id+", " +
-                "name='"+name+"'}";
+                "name='"+name+", " +
+                "surname='"+surname+", " +
+                "phone='"+phone+", " +
+                "email='"+email+"'}";
     }
 }

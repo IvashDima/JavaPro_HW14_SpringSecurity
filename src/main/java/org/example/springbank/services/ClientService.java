@@ -47,7 +47,7 @@ public class ClientService {
         Client client;
 
         for (int i = 0; i < 13; i++) {
-            client = new Client("Name" + i); //, "Surname" + i, "1234567" + i, "user" + i + "@test.com"
+            client = new Client("Name" + i, "Surname" + i, "1234567" + i, "user" + i + "@test.com");
             addClient(client);
         }
     }

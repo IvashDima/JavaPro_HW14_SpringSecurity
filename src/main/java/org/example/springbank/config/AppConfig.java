@@ -24,7 +24,7 @@ public class AppConfig implements WebMvcConfigurer {
                 Client client;
 
                 for (int i = 0; i < 13; i++) {
-                    client = new Client("Name" + i); //, "Surname" + i, "1234567" + i, "user" + i + "@test.com"
+                    client = new Client("Name" + i, "Surname" + i, "1234567" + i, "user" + i + "@test.com");
                     clientService.addClient(client);
                 }
             }
