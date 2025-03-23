@@ -12,16 +12,10 @@ import java.util.List;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-//    @Query("SELECT c FROM Client c WHERE c.group = :group")
-//    List<Client> findByGroup(@Param("group") Group group, Pageable pageable);
-//
-//    @Query("SELECT COUNT(c) FROM Client c WHERE c.group = :group")
-//    long countByGroup(@Param("group") Group group);
-
     @Query("SELECT c FROM Client c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Client> findByPattern(@Param("pattern") String pattern, Pageable pageable);
 
-    // List<Contact> findByNameOrEmailOrderById(String name, String email);
-    // List<Contact> findByNameAndEmail(String name, String email);
+//     List<Client> findByNameOrEmailOrderById(String name, String email);
+//     List<Client> findByNameAndEmail(String name, String email);
 
 }
