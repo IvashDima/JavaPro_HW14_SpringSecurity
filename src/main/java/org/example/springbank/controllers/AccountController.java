@@ -46,7 +46,7 @@ public class AccountController {
     }
 
     @GetMapping("/client/{id}")
-    public String listGroup(
+    public String listClient(
             @PathVariable(value = "id") long clientId,
             @RequestParam(required = false, defaultValue = "0") Integer page,
             Model model)
