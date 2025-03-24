@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    @Query("SELECT c FROM Account c WHERE LOWER(c.balance) LIKE LOWER(CONCAT('%', :pattern, '%'))")
+    @Query("SELECT c FROM Account c WHERE LOWER(c.currency) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Account> findByPattern(@Param("pattern") String pattern, Pageable pageable);
 
     @Query("SELECT c FROM Account c WHERE c.client = :client")

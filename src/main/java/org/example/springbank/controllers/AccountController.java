@@ -25,7 +25,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/accounts/")
+    @GetMapping("/account/")
     public String index(Model model,
                                 @RequestParam(required = false, defaultValue = "0") Integer page){
         if (page < 0) page = 0;
@@ -37,19 +37,19 @@ public class AccountController {
         model.addAttribute("accounts", accounts);
         model.addAttribute("allPages", getPageCount());
 
-        return "/accounts/index";
+        return "/account/index";
     }
 
     @GetMapping("/reset")
     public String reset() {
         accountService.reset();
-        return "redirect:/accounts/";
+        return "redirect:/account/";
     }
 
-    @GetMapping("/accounts/account_add_page")
+    @GetMapping("/account/account_add_page")
     public String accountAddPage(Model model) {
         model.addAttribute("clients", accountService.findClients());
-        return "accounts/account_add_page";
+        return "account/account_add_page";
     }
 
     @GetMapping("/client/{id}")
@@ -69,15 +69,15 @@ public class AccountController {
         model.addAttribute("byClientPages", getPageCount(client));
         model.addAttribute("clientId", clientId);
 
-        return "accounts/index";
+        return "account/index";
     }
 
-    @PostMapping(value = "/accounts/search")
+    @PostMapping(value = "/account/search")
     public String search(@RequestParam String pattern, Model model) {
         model.addAttribute("clients", accountService.findClients());
         model.addAttribute("accounts", accountService.findByPattern(pattern, null));
 
-        return "accounts/index";
+        return "account/index";
     }
 
     @PostMapping(value="/account/add")
@@ -90,7 +90,7 @@ public class AccountController {
         Account account = new Account(client, balance, currency);
         accountService.addAccount(account);
 
-        return "redirect:/accounts/";
+        return "redirect:/account/";
     }
 
     private long getPageCount() {

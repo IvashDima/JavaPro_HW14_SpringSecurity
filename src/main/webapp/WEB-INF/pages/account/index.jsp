@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container">
-        <h3><img height="50" width="55" src="<c:url value="/static/logo.png"/>"/><a href="/accounts/">Accounts List</a></h3>
+        <h3><img height="50" width="55" src="<c:url value="/static/logo.png"/>"/><a href="/account/">Accounts List</a></h3>
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -30,16 +30,16 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/accounts/">Default</a></li>
+                                <li><a href="/account/">Default</a></li>
                                 <c:forEach items="${clients}" var="client">
                                     <li><a href="/client/${client.id}">${client.name}</a></li>
                                 </c:forEach>
                             </ul>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" role="search" action="/accounts/search" method="post">
+                    <form class="navbar-form navbar-left" role="search" action="/account/search" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="pattern" placeholder="Search">
+                            <input type="text" class="form-control" name="pattern" placeholder="Search by currency">
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
@@ -54,6 +54,7 @@
                 <td><b>Client</b></td>
                 <td><b>Balance</b></td>
                 <td><b>Currency</b></td>
+                <td><b>Client details</b></td>
             </tr>
             </thead>
             <c:forEach items="${accounts}" var="account">
@@ -78,14 +79,14 @@
             <ul class="pagination">
                 <c:if test="${allPages ne null}">
                     <c:forEach var="i" begin="1" end="${allPages}">
-                        <li><a href="/accounts/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                        <li><a href="/account/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
-<%--                <c:if test="${byClientPages ne null}">--%>
-<%--                    <c:forEach var="i" begin="1" end="${byClientPages}">--%>
-<%--                        <li><a href="/accounts/client/${clientId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>--%>
-<%--                    </c:forEach>--%>
-<%--                </c:if>--%>
+                <c:if test="${byClientPages ne null}">
+                    <c:forEach var="i" begin="1" end="${byClientPages}">
+                        <li><a href="/account/client/${clientId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                    </c:forEach>
+                </c:if>
             </ul>
         </nav>
     </div>
@@ -94,11 +95,11 @@
         $('.dropdown-toggle').dropdown();
 
         $('#add_account').click(function(){
-            window.location.href='/accounts/account_add_page';
+            window.location.href='/account/account_add_page';
         });
 
         $('#reset').click(function(){
-            window.location.href='/accounts/reset';
+            window.location.href='/account/reset';
         });
 
         $('#delete_account').click(function(){
@@ -106,7 +107,7 @@
             $(":checked").each(function() {
                 data['toDelete[]'].push($(this).val());
             });
-            $.post("/accounts/delete", data, function(data, status) {
+            $.post("/account/delete", data, function(data, status) {
                 window.location.reload();
             });
         });
