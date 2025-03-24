@@ -6,6 +6,7 @@ import org.example.springbank.models.Client;
 import org.example.springbank.services.AccountService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
+@Controller
 public class AccountController {
     static final int DEFAULT_CLIENT_ID = -1;
     static final int ITEMS_PER_PAGE = 5;
@@ -24,8 +25,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/accounts_page")
-    public String accounts_page(Model model,
+    @GetMapping("/accounts/")
+    public String index(Model model,
                                 @RequestParam(required = false, defaultValue = "0") Integer page){
         if (page < 0) page = 0;
 
@@ -36,13 +37,19 @@ public class AccountController {
         model.addAttribute("accounts", accounts);
         model.addAttribute("allPages", getPageCount());
 
-        return "accounts_page";
+        return "/accounts/index";
     }
 
     @GetMapping("/reset")
     public String reset() {
         accountService.reset();
-        return "redirect:/accounts_page";
+        return "redirect:/accounts/";
+    }
+
+    @GetMapping("/accounts/account_add_page")
+    public String accountAddPage(Model model) {
+        model.addAttribute("clients", accountService.findClients());
+        return "accounts/account_add_page";
     }
 
     @GetMapping("/client/{id}")
@@ -62,15 +69,15 @@ public class AccountController {
         model.addAttribute("byClientPages", getPageCount(client));
         model.addAttribute("clientId", clientId);
 
-        return "accounts_page";
+        return "accounts/index";
     }
 
-    @PostMapping(value = "/search")
+    @PostMapping(value = "/accounts/search")
     public String search(@RequestParam String pattern, Model model) {
         model.addAttribute("clients", accountService.findClients());
         model.addAttribute("accounts", accountService.findByPattern(pattern, null));
 
-        return "accounts_page";
+        return "accounts/index";
     }
 
     @PostMapping(value="/account/add")
@@ -83,7 +90,7 @@ public class AccountController {
         Account account = new Account(client, balance, currency);
         accountService.addAccount(account);
 
-        return "redirect:/accounts_page";
+        return "redirect:/accounts/";
     }
 
     private long getPageCount() {
