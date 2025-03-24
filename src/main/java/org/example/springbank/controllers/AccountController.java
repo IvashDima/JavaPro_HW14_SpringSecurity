@@ -87,7 +87,6 @@ public class AccountController {
                              @RequestParam CurrencyType currency)
     {
         Client client = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
-//        CurrencyType currency = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
 
         Account account = new Account(client, balance, currency);
         accountService.addAccount(account);

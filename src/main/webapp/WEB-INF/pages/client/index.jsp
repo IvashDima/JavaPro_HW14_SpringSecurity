@@ -16,28 +16,28 @@
   </head>
   <body>
     <div class="container">
-      <h3><img height="50" width="55" src="<c:url value="/static/logo.png"/>"/><a href="/">Client List</a></h3>
+      <h3><img height="50" width="55" src="<c:url value="/static/logo.png"/>"/><a href="/client/">Client List</a></h3>
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul id="groupList" class="nav navbar-nav">
-              <li><button type="button" id="add_contact" class="btn btn-default navbar-btn">Add Client</button></li>
+              <li><button type="button" id="add_client" class="btn btn-default navbar-btn">Add Client</button></li>
 <%--              <li><button type="button" id="add_group" class="btn btn-default navbar-btn">Add Group</button></li>--%>
               <li><button type="button" id="delete_contact" class="btn btn-default navbar-btn">Delete Client</button></li>
               <li><button type="button" id="reset" class="btn btn-default navbar-btn">Reset</button></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/">Default</a></li>
-                  <c:forEach items="${groups}" var="group">
-                    <li><a href="/group/${group.id}">${group.name}</a></li>
-                  </c:forEach>
-                </ul>
-              </li>
+<%--              <li class="dropdown">--%>
+<%--                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>--%>
+<%--                <ul class="dropdown-menu">--%>
+<%--                  <li><a href="/">Default</a></li>--%>
+<%--                  <c:forEach items="${groups}" var="group">--%>
+<%--                    <li><a href="/group/${group.id}">${group.name}</a></li>--%>
+<%--                  </c:forEach>--%>
+<%--                </ul>--%>
+<%--              </li>--%>
             </ul>
-            <form class="navbar-form navbar-left" role="search" action="/search" method="post">
+            <form class="navbar-form navbar-left" role="search" action="/client/search" method="post">
               <div class="form-group">
                 <input type="text" class="form-control" name="pattern" placeholder="Search">
               </div>
@@ -64,14 +64,6 @@
             <td>${client.surname}</td>
             <td>${client.phone}</td>
             <td>${client.email}</td>
-<%--            <c:choose>--%>
-<%--              <c:when test="${client.group ne null}">--%>
-<%--                <td>${client.group.name}</td>--%>
-<%--              </c:when>--%>
-<%--              <c:otherwise>--%>
-<%--                <td>Default</td>--%>
-<%--              </c:otherwise>--%>
-<%--            </c:choose>--%>
           </tr>
         </c:forEach>
       </table>
@@ -80,14 +72,9 @@
         <ul class="pagination">
           <c:if test="${allPages ne null}">
             <c:forEach var="i" begin="1" end="${allPages}">
-              <li><a href="/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+              <li><a href="/client/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
             </c:forEach>
           </c:if>
-<%--          <c:if test="${byGroupPages ne null}">--%>
-<%--            <c:forEach var="i" begin="1" end="${byGroupPages}">--%>
-<%--              <li><a href="/group/${groupId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>--%>
-<%--            </c:forEach>--%>
-<%--          </c:if>--%>
         </ul>
       </nav>
     </div>
@@ -96,7 +83,7 @@
       $('.dropdown-toggle').dropdown();
 
       $('#add_client').click(function(){
-        window.location.href='/client_add_page';
+        window.location.href='/client/client_add_page';
       });
 
       // $('#add_group').click(function(){
@@ -104,7 +91,7 @@
       // });
 
       $('#reset').click(function(){
-        window.location.href='/reset';
+        window.location.href='/client/reset';
       });
 
       $('#delete_client').click(function(){
