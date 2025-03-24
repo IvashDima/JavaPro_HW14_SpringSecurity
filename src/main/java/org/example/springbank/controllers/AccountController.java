@@ -46,12 +46,6 @@ public class AccountController {
         return "redirect:/account/";
     }
 
-    @GetMapping("/account/account_add_page")
-    public String accountAddPage(Model model) {
-        model.addAttribute("clients", accountService.findClients());
-        return "account/account_add_page";
-    }
-
     @GetMapping("/client/{id}")
     public String listClient(
             @PathVariable(value = "id") long clientId,
@@ -80,12 +74,20 @@ public class AccountController {
         return "account/index";
     }
 
+    @GetMapping("/account/account_add_page")
+    public String accountAddPage(Model model) {
+        model.addAttribute("clients", accountService.findClients());
+        model.addAttribute("currencies", CurrencyType.values());
+        return "account/account_add_page";
+    }
+
     @PostMapping(value="/account/add")
     public String accountAdd(@RequestParam(value = "client") long clientId,
                              @RequestParam double balance,
                              @RequestParam CurrencyType currency)
     {
         Client client = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
+//        CurrencyType currency = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
 
         Account account = new Account(client, balance, currency);
         accountService.addAccount(account);
