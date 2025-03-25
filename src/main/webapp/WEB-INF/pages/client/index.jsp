@@ -24,9 +24,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul id="groupList" class="nav navbar-nav">
               <li><button type="button" id="add_client" class="btn btn-default navbar-btn">Add Client</button></li>
-<%--              <li><button type="button" id="add_group" class="btn btn-default navbar-btn">Add Group</button></li>--%>
-              <li><button type="button" id="delete_contact" class="btn btn-default navbar-btn">Delete Client</button></li>
-              <li><button type="button" id="reset" class="btn btn-default navbar-btn">Reset</button></li>
+              <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
 <%--              <li class="dropdown">--%>
 <%--                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>--%>
 <%--                <ul class="dropdown-menu">--%>
@@ -39,7 +37,7 @@
             </ul>
             <form class="navbar-form navbar-left" role="search" action="/client/search" method="post">
               <div class="form-group">
-                <input type="text" class="form-control" name="pattern" placeholder="Search">
+                <input type="text" class="form-control" name="pattern" placeholder="Search by name">
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
@@ -86,22 +84,8 @@
         window.location.href='/client/client_add_page';
       });
 
-      // $('#add_group').click(function(){
-      //   window.location.href='/group_add_page';
-      // });
-
       $('#reset').click(function(){
         window.location.href='/client/reset';
-      });
-
-      $('#delete_client').click(function(){
-        let data = { 'toDelete[]' : []};
-        $(":checked").each(function() {
-          data['toDelete[]'].push($(this).val());
-        });
-        $.post("/client/delete", data, function(data, status) {
-          window.location.reload();
-        });
       });
     </script>
   </body>

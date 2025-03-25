@@ -24,9 +24,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul id="groupList" class="nav navbar-nav">
                         <li><button type="button" id="add_account" class="btn btn-default navbar-btn">Add Account</button></li>
-<%--                        <li><button type="button" id="add_client" class="btn btn-default navbar-btn">Add Client</button></li>--%>
-                        <li><button type="button" id="delete_account" class="btn btn-default navbar-btn">Delete Account</button></li>
-                        <li><button type="button" id="reset" class="btn btn-default navbar-btn">Reset</button></li>
+                        <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -100,16 +98,6 @@
 
         $('#reset').click(function(){
             window.location.href='/account/reset';
-        });
-
-        $('#delete_account').click(function(){
-            let data = { 'toDelete[]' : []};
-            $(":checked").each(function() {
-                data['toDelete[]'].push($(this).val());
-            });
-            $.post("/account/delete", data, function(data, status) {
-                window.location.reload();
-            });
         });
     </script>
 
