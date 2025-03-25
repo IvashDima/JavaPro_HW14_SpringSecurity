@@ -38,6 +38,11 @@ public class AccountService {
     }
 
     @Transactional(readOnly=true)
+    public Account findById(long id) {
+        return accountRepository.findById(id).get();
+    }
+
+    @Transactional(readOnly=true)
     public List<Account> findByClient(Client client, Pageable pageable) {
         return accountRepository.findByClient(client, pageable);
     }
