@@ -5,6 +5,7 @@ import org.example.springbank.models.Account;
 import org.example.springbank.models.Client;
 import org.example.springbank.services.AccountService;
 import org.example.springbank.services.DemoDataService;
+import org.example.springbank.services.TransactionService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class AccountController {
 
     @GetMapping("/account/")
     public String index(Model model,
-                                @RequestParam(required = false, defaultValue = "0") Integer page){
+                        @RequestParam(required = false, defaultValue = "0") Integer page){
         if (page < 0) page = 0;
 
         List<Account> accounts = accountService
@@ -68,6 +69,7 @@ public class AccountController {
         demoDataService.generateDemoData();
         return "redirect:/account/";
     }
+
 
     @GetMapping("/client/{id}")
     public String listClient(

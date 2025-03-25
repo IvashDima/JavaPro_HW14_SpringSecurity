@@ -70,11 +70,14 @@
                     <td>${account.balance}</td>
                     <td>${account.currency}</td>
                     <td>${account.client}</td>
-                    <td><button type="button" id="show_transactions" class="btn btn-default navbar-btn">Show</button></td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/transaction?accountId=${account.id}">
+                            <button type="button" id="view_transactions" class="btn btn-default navbar-btn">View</button>
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
-
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <c:if test="${allPages ne null}">
@@ -90,7 +93,6 @@
             </ul>
         </nav>
     </div>
-
     <script>
         $('.dropdown-toggle').dropdown();
 
@@ -100,8 +102,8 @@
         $('#reset').click(function(){
             window.location.href='/account/reset';
         });
-        $('#show_transactions').click(function(){
-            window.location.href='/account/transaction';
+        $('#view_transactions').click(function(){
+            window.location.href='/transaction';
         });
     </script>
 
