@@ -1,9 +1,8 @@
 package org.example.springbank.controllers;
 
-import org.example.springbank.enums.CurrencyType;
-import org.example.springbank.models.Account;
 import org.example.springbank.models.Client;
 import org.example.springbank.services.ClientService;
+import org.example.springbank.services.DemoDataService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -19,9 +18,11 @@ public class ClientController {
 
     static final int ITEMS_PER_PAGE = 5;
     private final ClientService clientService;
+    private final DemoDataService demoDataService;
 
-    public ClientController(ClientService clientService){
+    public ClientController(ClientService clientService, DemoDataService demoDataService){
         this.clientService = clientService;
+        this.demoDataService = demoDataService;
     }
 
     @GetMapping("/client/")
@@ -51,6 +52,19 @@ public class ClientController {
         clientService.addClient(client);
 
         return "redirect:/client/";
+    }
+
+    @GetMapping("/client/reset")
+    public String resetDemoData() {
+        demoDataService.generateDemoData();
+        return "redirect:/client/";
+    }
+
+    @PostMapping(value = "/client/search")
+    public String search(@RequestParam String pattern, Model model) {
+        model.addAttribute("clients", clientService.findByPattern(pattern, null));
+
+        return "client/index";
     }
 
     private long getPageCount() {

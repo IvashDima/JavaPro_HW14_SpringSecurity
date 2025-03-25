@@ -4,6 +4,7 @@ import org.example.springbank.enums.CurrencyType;
 import org.example.springbank.models.Account;
 import org.example.springbank.models.Client;
 import org.example.springbank.services.AccountService;
+import org.example.springbank.services.DemoDataService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,11 @@ public class AccountController {
     static final int ITEMS_PER_PAGE = 5;
 
     private final AccountService accountService;
+    private final DemoDataService demoDataService;
 
-    public AccountController(AccountService accountService){
+    public AccountController(AccountService accountService, DemoDataService demoDataService){
         this.accountService = accountService;
+        this.demoDataService = demoDataService;
     }
 
     @GetMapping("/account/")
@@ -40,9 +43,29 @@ public class AccountController {
         return "/account/index";
     }
 
-    @GetMapping("/reset")
-    public String reset() {
-        accountService.reset();
+    @GetMapping("/account/account_add_page")
+    public String accountAddPage(Model model) {
+        model.addAttribute("clients", accountService.findClients());
+        model.addAttribute("currencies", CurrencyType.values());
+        return "account/account_add_page";
+    }
+
+    @PostMapping(value="/account/add")
+    public String accountAdd(@RequestParam(value = "client") long clientId,
+                             @RequestParam double balance,
+                             @RequestParam CurrencyType currency)
+    {
+        Client client = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
+
+        Account account = new Account(client, balance, currency);
+        accountService.addAccount(account);
+
+        return "redirect:/account/";
+    }
+
+    @GetMapping("account/reset")
+    public String resetDemoData() {
+        demoDataService.generateDemoData();
         return "redirect:/account/";
     }
 
@@ -72,26 +95,6 @@ public class AccountController {
         model.addAttribute("accounts", accountService.findByPattern(pattern, null));
 
         return "account/index";
-    }
-
-    @GetMapping("/account/account_add_page")
-    public String accountAddPage(Model model) {
-        model.addAttribute("clients", accountService.findClients());
-        model.addAttribute("currencies", CurrencyType.values());
-        return "account/account_add_page";
-    }
-
-    @PostMapping(value="/account/add")
-    public String accountAdd(@RequestParam(value = "client") long clientId,
-                             @RequestParam double balance,
-                             @RequestParam CurrencyType currency)
-    {
-        Client client = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
-
-        Account account = new Account(client, balance, currency);
-        accountService.addAccount(account);
-
-        return "redirect:/account/";
     }
 
     private long getPageCount() {

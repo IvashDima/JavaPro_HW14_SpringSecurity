@@ -1,6 +1,5 @@
 package org.example.springbank.services;
 
-import org.example.springbank.enums.CurrencyType;
 import org.example.springbank.models.Account;
 import org.example.springbank.models.Client;
 import org.example.springbank.repositories.AccountRepository;
@@ -63,27 +62,7 @@ public class AccountService {
         return clientRepository.findById(id).get();
     }
 
-    @Transactional
-    public void reset() {
+    public void deleteAllAccounts() {
         accountRepository.deleteAll();
-
-        Client client = new Client("Name", "Surname", "1234567", "user@test.com");
-        Account account;
-
-        account = new Account(client, 1000, CurrencyType.EUR);
-        addAccount(account);
-        account = new Account(client, 1000, CurrencyType.USD);
-        addAccount(account);
-        account = new Account(client, 1000, CurrencyType.UAH);
-        addAccount(account);
-
     }
-
-
-
-
-
-
-
-
 }

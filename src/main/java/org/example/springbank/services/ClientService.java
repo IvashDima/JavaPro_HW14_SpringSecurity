@@ -40,15 +40,7 @@ public class ClientService {
         return clientRepository.count();
     }
 
-    @Transactional
-    public void reset() {
+    public void deleteAllClients() {
         clientRepository.deleteAll();
-
-        Client client;
-
-        for (int i = 0; i < 13; i++) {
-            client = new Client("Name" + i, "Surname" + i, "1234567" + i, "user" + i + "@test.com");
-            addClient(client);
-        }
     }
 }
