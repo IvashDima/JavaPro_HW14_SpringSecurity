@@ -36,10 +36,10 @@ public class DemoDataService {
             client = new Client("Name" + i, "Surname" + i, "1234567" + i, "user" + i + "@test.com");
             clientService.addClient(client);
             for (CurrencyType currencyType : CurrencyType.values()){
-                account = new Account(client, 1000, currencyType);
+                account = new Account(client, 0, currencyType);
                 accountService.addAccount(account);
                 transaction = new Transaction(null, account, 1000, TransactionType.deposit);
-                transactionService.addTransaction(transaction);
+                transactionService.deposit(transaction);
             }
         }
     }
