@@ -53,6 +53,7 @@
                 <td><b>Balance</b></td>
                 <td><b>Currency</b></td>
                 <td><b>Client details</b></td>
+                <td><b>Transactions</b></td>
             </tr>
             </thead>
             <c:forEach items="${accounts}" var="account">
@@ -69,6 +70,7 @@
                     <td>${account.balance}</td>
                     <td>${account.currency}</td>
                     <td>${account.client}</td>
+                    <td><button type="button" id="show_transactions" class="btn btn-default navbar-btn">Show</button></td>
                 </tr>
             </c:forEach>
         </table>
@@ -95,9 +97,11 @@
         $('#add_account').click(function(){
             window.location.href='/account/account_add_page';
         });
-
         $('#reset').click(function(){
             window.location.href='/account/reset';
+        });
+        $('#show_transactions').click(function(){
+            window.location.href='/account/transaction';
         });
     </script>
 

@@ -1,7 +1,6 @@
 package org.example.springbank.services;
 
 import org.example.springbank.models.Account;
-import org.example.springbank.models.Client;
 import org.example.springbank.models.Transaction;
 import org.example.springbank.repositories.TransactionRepository;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +23,11 @@ public class TransactionService {
     @Transactional(readOnly=true)
     public List<Transaction> findByPattern(String pattern, Pageable pageable) {
         return transactionRepository.findByPattern(pattern, pageable);
+    }
+
+    @Transactional(readOnly=true)
+    public List<Transaction> findByAnyAccount(Account account, Pageable pageable) {
+        return transactionRepository.findByAnyAccount(account, account, pageable);
     }
 
     @Transactional(readOnly=true)
