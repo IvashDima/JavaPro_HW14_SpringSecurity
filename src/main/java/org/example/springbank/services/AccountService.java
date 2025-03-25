@@ -24,8 +24,8 @@ public class AccountService {
     @Transactional
     public void addAccount(Account account){accountRepository.save(account);}
 
-    @Transactional
-    public void addClient(Client client){clientRepository.save(client);}
+//    @Transactional
+//    public void addClient(Client client){clientRepository.save(client);}
 
     @Transactional(readOnly=true)
     public List<Client> findClients() {
