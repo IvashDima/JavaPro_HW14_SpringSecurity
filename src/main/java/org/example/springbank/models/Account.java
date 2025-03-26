@@ -75,10 +75,11 @@ public class Account {
 
     @Override
     public String toString(){
-        return "Account{id="+id+", " +
-                "client='"+client.getName()+"', " +
-                "balance="+balance+", " +
-                "currency="+currency+
+        return "Account{" +
+                "accountId="+id+", " +
+                "client='"+client.getName()+" "+client.getSurname()+"'"+
+//              ", " +"balance="+balance+
+//              ", " +"currency="+currency+
                 "}";
     }
 }
