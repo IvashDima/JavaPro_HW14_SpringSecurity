@@ -41,6 +41,11 @@ public class TransactionService {
     }
 
     @Transactional(readOnly=true)
+    public Account findAccount(long id) {
+        return accountRepository.findById(id).get();
+    }
+
+    @Transactional(readOnly=true)
     public List<Transaction> findAll(Pageable pageable) {
         return transactionRepository.findAll(pageable).getContent();
     }

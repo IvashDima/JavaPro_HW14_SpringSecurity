@@ -10,8 +10,7 @@
 <html>
   <head>
     <title>Main page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -53,6 +52,7 @@
           <td><b>Surname</b></td>
           <td><b>Phone</b></td>
           <td><b>E-mail</b></td>
+          <td><b>Actions</b></td>
         </tr>
         </thead>
         <c:forEach items="${clients}" var="client">
@@ -62,6 +62,11 @@
             <td>${client.surname}</td>
             <td>${client.phone}</td>
             <td>${client.email}</td>
+              <td>
+                  <a href="${pageContext.request.contextPath}/account/client/${client.id}">
+                      <button type="button" id="accounts" class="btn btn-default navbar-btn">View Accounts</button>
+                  </a>
+              </td>
           </tr>
         </c:forEach>
       </table>

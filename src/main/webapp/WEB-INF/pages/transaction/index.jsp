@@ -60,8 +60,6 @@
                 <tr>
                     <td><input type="checkbox" name="toDelete[]" value="${transaction.id}" id="checkbox_${transaction.id}"/></td>
                     <td>${transaction.id}</td>
-<%--                    <td>${transaction.sender}</td>--%>
-<%--                    <td>${transaction.receiverAccount}</td>--%>
                     <c:choose>
                         <c:when test="${transaction.sender ne null}">
                             <td>${transaction.sender}</td>
@@ -79,7 +77,7 @@
                         </c:otherwise>
                     </c:choose>
                     <td>${transaction.amount}</td>
-                    <td>${transaction.type.values()}</td>
+                    <td>${transaction.type}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -90,8 +88,8 @@
                         <li><a href="/transaction/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
-                <c:if test="${byClientPages ne null}">
-                    <c:forEach var="i" begin="1" end="${byClientPages}">
+                <c:if test="${byReceiverAccountPages ne null}">
+                    <c:forEach var="i" begin="1" end="${byReceiverAccountPages}">
                         <li><a href="/transaction/client/${clientId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>

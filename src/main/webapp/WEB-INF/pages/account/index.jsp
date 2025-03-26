@@ -23,14 +23,14 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul id="groupList" class="nav navbar-nav">
-                        <li><button type="button" id="add_account" class="btn btn-default navbar-btn">Add Account</button></li>
+                        <li><button type="button" id="add_account" class="btn btn-default navbar-btn">Open Account</button></li>
                         <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/account/">Default</a></li>
                                 <c:forEach items="${clients}" var="client">
-                                    <li><a href="/client/${client.id}">${client.name}</a></li>
+                                    <li><a href="/account/client/${client.id}">${client.name}</a></li>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -54,7 +54,7 @@
                 <td><b>Balance</b></td>
                 <td><b>Currency</b></td>
                 <td><b>Client details</b></td>
-                <td><b>Transactions</b></td>
+                <td><b>Actions</b></td>
             </tr>
             </thead>
             <c:forEach items="${accounts}" var="account">
@@ -73,7 +73,7 @@
                     <td>${account.currency}</td>
                     <td>${account.client}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/transaction/?accountId=${account.id}">
+                        <a href="${pageContext.request.contextPath}/transaction/account/${account.id}">
                             <button type="button" id="transactions" class="btn btn-default navbar-btn">View Transactions</button>
                         </a>
                     </td>
@@ -104,9 +104,9 @@
         $('#reset').click(function(){
             window.location.href='/account/reset';
         });
-        $('#transactions').click(function(){
-            window.location.href='/transaction/';
-        });
+        // $('#transactions').click(function(){
+        //     window.location.href='/transaction/';
+        // });
     </script>
 
 </body>

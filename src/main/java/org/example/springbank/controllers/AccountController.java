@@ -4,8 +4,8 @@ import org.example.springbank.enums.CurrencyType;
 import org.example.springbank.models.Account;
 import org.example.springbank.models.Client;
 import org.example.springbank.services.AccountService;
+import org.example.springbank.services.ClientService;
 import org.example.springbank.services.DemoDataService;
-import org.example.springbank.services.TransactionService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -44,6 +44,26 @@ public class AccountController {
         return "/account/index";
     }
 
+    @GetMapping("/account/client/{id}")
+    public String listAccount(
+            @PathVariable(value = "id") long clientId,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            Model model)
+    {
+        Client client = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
+        if (page < 0) page = 0;
+
+        List<Account> accounts = accountService
+                .findByClient(client, PageRequest.of(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+
+        model.addAttribute("clients", accountService.findClients());
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("byClientPages", getPageCount(client));
+        model.addAttribute("clientId", clientId);
+
+        return "account/index";
+    }
+
     @GetMapping("/account/account_add_page")
     public String accountAddPage(Model model) {
         model.addAttribute("clients", accountService.findClients());
@@ -62,33 +82,6 @@ public class AccountController {
         accountService.addAccount(account);
 
         return "redirect:/account/";
-    }
-
-    @GetMapping("account/reset")
-    public String resetDemoData() {
-        demoDataService.generateDemoData();
-        return "redirect:/account/";
-    }
-
-
-    @GetMapping("/client/{id}")
-    public String listClient(
-            @PathVariable(value = "id") long clientId,
-            @RequestParam(required = false, defaultValue = "0") Integer page,
-            Model model)
-    {
-        Client client = (clientId != DEFAULT_CLIENT_ID) ? accountService.findClient(clientId) : null;
-        if (page < 0) page = 0;
-
-        List<Account> accounts = accountService
-                .findByClient(client, PageRequest.of(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
-        model.addAttribute("clients", accountService.findClients());
-        model.addAttribute("accounts", accounts);
-        model.addAttribute("byClientPages", getPageCount(client));
-        model.addAttribute("clientId", clientId);
-
-        return "account/index";
     }
 
     @PostMapping(value = "/account/search")
