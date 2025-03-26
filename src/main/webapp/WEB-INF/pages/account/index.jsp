@@ -74,13 +74,8 @@
                     <td>${account.client}</td>
                     <td>
                         <a href="${pageContext.request.contextPath}/transaction/?accountId=${account.id}">
-                            <button>View Transactions</button>
+                            <button type="button" id="transactions" class="btn btn-default navbar-btn">View Transactions</button>
                         </a>
-<%--                        <a href="${pageContext.request.contextPath}/transaction?accountId=${account.id}">--%>
-<%--                            <button type="button" id="transactions" class="btn btn-default navbar-btn"--%>
-<%--&lt;%&ndash;                                    onclick="fetch('transactions').then(() => alert('View transactions by account!'))"&ndash;%&gt;--%>
-<%--                            >View</button>--%>
-<%--                        </a>--%>
                     </td>
                 </tr>
             </c:forEach>
