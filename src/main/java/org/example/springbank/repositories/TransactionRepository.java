@@ -15,17 +15,17 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT c FROM Transaction c WHERE LOWER(c.amount) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Transaction> findByPattern(@Param("pattern") String pattern, Pageable pageable);
 
-    @Query("SELECT c FROM Transaction c WHERE c.senderAccount = :senderAccount OR c.receiverAccount = :receiverAccount")
+    @Query("SELECT c FROM Transaction c WHERE c.sender = :senderAccount OR c.receiver = :receiverAccount")
     List<Transaction> findByAnyAccount(@Param("senderAccount") Account senderAccount, @Param("receiverAccount") Account receiverAccount, Pageable pageable);
 
-    @Query("SELECT c FROM Transaction c WHERE c.senderAccount = :senderAccount")
+    @Query("SELECT c FROM Transaction c WHERE c.sender = :senderAccount")
     List<Transaction> findBySenderAccount(@Param("senderAccount") Account senderAccount, Pageable pageable);
 
-    @Query("SELECT c FROM Transaction c WHERE c.receiverAccount = :receiverAccount")
+    @Query("SELECT c FROM Transaction c WHERE c.receiver = :receiverAccount")
     List<Transaction> findByReceiverAccount(@Param("receiverAccount") Account receiverAccount, Pageable pageable);
 
-    @Query("SELECT COUNT(c) FROM Transaction c WHERE c.senderAccount = :senderAccount")
+    @Query("SELECT COUNT(c) FROM Transaction c WHERE c.sender = :senderAccount")
     long countBySenderAccount(@Param("senderAccount") Account senderAccount);
-    @Query("SELECT COUNT(c) FROM Transaction c WHERE c.receiverAccount = :receiverAccount")
+    @Query("SELECT COUNT(c) FROM Transaction c WHERE c.receiver = :receiverAccount")
     long countByReceiverAccount(@Param("receiverAccount") Account receiverAccount);
 }

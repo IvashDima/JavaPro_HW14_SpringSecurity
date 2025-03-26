@@ -49,6 +49,7 @@
             <thead>
             <tr>
                 <td></td>
+                <td><b>Id</b></td>
                 <td><b>From</b></td>
                 <td><b>To</b></td>
                 <td><b>Amount</b></td>
@@ -58,24 +59,27 @@
             <c:forEach items="${transactions}" var="transaction">
                 <tr>
                     <td><input type="checkbox" name="toDelete[]" value="${transaction.id}" id="checkbox_${transaction.id}"/></td>
+                    <td>${transaction.id}</td>
+<%--                    <td>${transaction.sender}</td>--%>
+<%--                    <td>${transaction.receiverAccount}</td>--%>
                     <c:choose>
-                        <c:when test="${transaction.senderAccount ne null}">
-                            <td>${transaction.senderAccount.id}</td>
+                        <c:when test="${transaction.sender ne null}">
+                            <td>${transaction.sender}</td>
                         </c:when>
                         <c:otherwise>
                             <td>Default</td>
                         </c:otherwise>
                     </c:choose>
                     <c:choose>
-                        <c:when test="${transaction.receiverAccount ne null}">
-                            <td>${transaction.receiverAccount.id}</td>
+                        <c:when test="${transaction.receiver ne null}">
+                            <td>${transaction.receiver}</td>
                         </c:when>
                         <c:otherwise>
                             <td>Default</td>
                         </c:otherwise>
                     </c:choose>
                     <td>${transaction.amount}</td>
-                    <td>${transaction.type}</td>
+                    <td>${transaction.type.values()}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -83,12 +87,12 @@
             <ul class="pagination">
                 <c:if test="${allPages ne null}">
                     <c:forEach var="i" begin="1" end="${allPages}">
-                        <li><a href="/account/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                        <li><a href="/transaction/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
                 <c:if test="${byClientPages ne null}">
                     <c:forEach var="i" begin="1" end="${byClientPages}">
-                        <li><a href="/account/client/${clientId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
+                        <li><a href="/transaction/client/${clientId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
             </ul>

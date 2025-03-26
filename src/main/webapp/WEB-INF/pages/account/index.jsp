@@ -49,6 +49,7 @@
             <thead>
             <tr>
                 <td></td>
+                <td><b>Id</b></td>
                 <td><b>Client</b></td>
                 <td><b>Balance</b></td>
                 <td><b>Currency</b></td>
@@ -59,6 +60,7 @@
             <c:forEach items="${accounts}" var="account">
                 <tr>
                     <td><input type="checkbox" name="toDelete[]" value="${account.id}" id="checkbox_${account.id}"/></td>
+                    <td>${account.id}</td>
                     <c:choose>
                         <c:when test="${account.client ne null}">
                             <td>${account.client.name}</td>
@@ -71,9 +73,14 @@
                     <td>${account.currency}</td>
                     <td>${account.client}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/transaction?accountId=${account.id}">
-                            <button type="button" id="view_transactions" class="btn btn-default navbar-btn">View</button>
+                        <a href="${pageContext.request.contextPath}/transaction/?accountId=${account.id}">
+                            <button>View Transactions</button>
                         </a>
+<%--                        <a href="${pageContext.request.contextPath}/transaction?accountId=${account.id}">--%>
+<%--                            <button type="button" id="transactions" class="btn btn-default navbar-btn"--%>
+<%--&lt;%&ndash;                                    onclick="fetch('transactions').then(() => alert('View transactions by account!'))"&ndash;%&gt;--%>
+<%--                            >View</button>--%>
+<%--                        </a>--%>
                     </td>
                 </tr>
             </c:forEach>
@@ -102,8 +109,8 @@
         $('#reset').click(function(){
             window.location.href='/account/reset';
         });
-        $('#view_transactions').click(function(){
-            window.location.href='/transaction';
+        $('#transactions').click(function(){
+            window.location.href='/transaction/';
         });
     </script>
 

@@ -25,10 +25,10 @@ public class Account {
     @Column(nullable = false)
     private CurrencyType currency;
 
-    @OneToMany(mappedBy = "senderAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Transaction> sTransactions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "receiverAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private List<Transaction> rTransactions = new ArrayList<>();
 
     public Account(){}

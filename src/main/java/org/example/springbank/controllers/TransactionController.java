@@ -27,31 +27,19 @@ public class TransactionController {
         this.accountService = accountService;
     }
 
-//    @GetMapping("/transaction/")
-//    public String index(Model model,
-//                        @RequestParam(required = false, defaultValue = "0") Integer page){
-//        if (page < 0) page = 0;
-//
-//        List<Transaction> transactions = transactionService
-//                .findAll(PageRequest.of(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-//
-//        model.addAttribute("account", transactionService.findAccounts());
-//        model.addAttribute("transactions", transactions);
-//        model.addAttribute("allPages", getPageCount());
-//
-//        return "/transaction/index";
-//    }
     @GetMapping("/transaction/")
     public String transactionPage(
-//            @RequestParam(required = false, defaultValue = "0") Integer page,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(value = "accountId", required = false) Long accountId,
             Model model)
     {
+        if (page < 0) page = 0;
+
         Account account = (accountId != null) ? accountService.findById(accountId) : null;
 
-        model.addAttribute("transactions", transactionService.findByAnyAccount(account, null));
-        model.addAttribute("currencies", CurrencyType.values());
-//        model.addAttribute("allPages", getPageCount());
+        model.addAttribute("transactions", transactionService.findByReceiverAccount(account, null));
+//        model.addAttribute("currencies", CurrencyType.values());
+        model.addAttribute("allPages", getPageCount());
         return "/transaction/index";
     }
 

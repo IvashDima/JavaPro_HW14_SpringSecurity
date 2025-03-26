@@ -13,11 +13,11 @@ public class Transaction {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id", nullable = true)
-    private Account senderAccount;
+    @JoinColumn(name = "sender_id", nullable = false)
+    private Account sender;
     @ManyToOne
     @JoinColumn(name = "receiver_id", nullable = false)
-    private Account receiverAccount;
+    private Account receiver;
 
     @Column(nullable = false)
     private double amount;
@@ -29,8 +29,8 @@ public class Transaction {
     public Transaction(){}
 
     public Transaction(Account senderAccount, Account receiverAccount, double amount, TransactionType type){
-        this.senderAccount = senderAccount;
-        this.receiverAccount = receiverAccount;
+        this.sender = senderAccount;
+        this.receiver = receiverAccount;
         this.amount = amount;
         this.type = type;
     }
@@ -40,16 +40,16 @@ public class Transaction {
     }
 
     public Account getSender() {
-        return senderAccount;
+        return sender;
     }
     public void setSender(Account senderAccount) {
-        this.senderAccount = senderAccount;
+        this.sender = senderAccount;
     }
     public Account getReceiver() {
-        return receiverAccount;
+        return receiver;
     }
     public void setReceiver(Account receiverAccount) {
-        this.receiverAccount = receiverAccount;
+        this.receiver = receiverAccount;
     }
 
     public double getAmount() {
@@ -72,8 +72,8 @@ public class Transaction {
     @Override
     public String toString(){
         return "Transaction{id="+id+", " +
-                "senderAccount="+senderAccount+", " +
-                "receiverAccount="+receiverAccount+", " +
+                "senderAccount="+sender+", " +
+                "receiverAccount="+receiver+", " +
                 "amount="+amount+", " +
                 "type="+type+
                 "}";
