@@ -19,12 +19,6 @@ public class ClientService {
     @Transactional
     public void addClient(Client client){clientRepository.save(client);}
 
-//    @Transactional
-//    public void deleteClient(long[] idList) {
-//        for (long id : idList)
-//            clientRepository.deleteById(id);
-//    }
-
     @Transactional(readOnly=true)
     public List<Client> findAll(Pageable pageable) {
         return clientRepository.findAll(pageable).getContent();
@@ -40,7 +34,14 @@ public class ClientService {
         return clientRepository.count();
     }
 
+    @Transactional
+    public void deleteClient(long[] idList) {
+        for (long id : idList)
+            clientRepository.deleteById(id);
+    }
+
     public void deleteAllClients() {
         clientRepository.deleteAll();
     }
+
 }

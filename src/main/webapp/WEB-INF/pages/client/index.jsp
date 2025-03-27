@@ -23,7 +23,8 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul id="groupList" class="nav navbar-nav">
               <li><button type="button" id="add_client" class="btn btn-default navbar-btn">Add Client</button></li>
-              <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
+              <li><button type="button" id="delete_client" class="btn btn-default navbar-btn">Delete Client</button></li>
+              <li><button type="button" id="reset" class="btn btn-default navbar-btn">Reset Demo Data</button></li>
 <%--              <li class="dropdown">--%>
 <%--                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>--%>
 <%--                <ul class="dropdown-menu">--%>
@@ -91,6 +92,16 @@
 
       $('#reset').click(function(){
         window.location.href='/client/reset';
+      });
+
+      $('#delete_client').click(function(){
+          let data = { 'toDelete[]' : []};
+          $(":checked").each(function() {
+              data['toDelete[]'].push($(this).val());
+          });
+          $.post("/client/delete", data, function(data, status) {
+              window.location.reload();
+          });
       });
     </script>
   </body>

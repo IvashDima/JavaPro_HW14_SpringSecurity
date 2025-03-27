@@ -5,6 +5,8 @@ import org.example.springbank.services.ClientService;
 import org.example.springbank.services.DemoDataService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +60,15 @@ public class ClientController {
     public String resetDemoData() {
         demoDataService.generateDemoData();
         return "redirect:/client/";
+    }
+
+    @PostMapping(value = "/client/delete")
+    public ResponseEntity<Void> delete(
+            @RequestParam(value = "toDelete[]", required = false) long[] toDelete) {
+        if (toDelete != null && toDelete.length > 0)
+            clientService.deleteClient(toDelete);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/client/search")
