@@ -28,10 +28,8 @@ public class TransactionService {
     @Transactional
     public void deposit(Transaction transaction){
         transactionRepository.save(transaction);
-//        transaction.getSender().setBalance(transaction.getAmount());
-//        accountRepository.save(transaction.getSender());
 
-        transaction.getReceiver().setBalance(transaction.getAmount());
+        transaction.getReceiver().deposit(transaction.getAmount());
         accountRepository.save(transaction.getReceiver());
     }
 

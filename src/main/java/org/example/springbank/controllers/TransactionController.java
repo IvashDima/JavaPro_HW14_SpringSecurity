@@ -1,6 +1,9 @@
 package org.example.springbank.controllers;
 
+import org.example.springbank.enums.CurrencyType;
+import org.example.springbank.enums.TransactionType;
 import org.example.springbank.models.Account;
+import org.example.springbank.models.Client;
 import org.example.springbank.models.Transaction;
 import org.example.springbank.services.AccountService;
 import org.example.springbank.services.DemoDataService;
@@ -62,6 +65,24 @@ public class TransactionController {
         model.addAttribute("accountId", accountId);
 
         return "transaction/index";
+    }
+
+    @GetMapping("/transaction/deposit_page")
+    public String transactionDepositPage(Model model) {
+        model.addAttribute("accounts", transactionService.findAccounts());
+        return "transaction/deposit_page";
+    }
+
+    @PostMapping(value="/transaction/deposit")
+    public String transactionDeposit(@RequestParam(value = "account") long accountId,
+                             @RequestParam double amount)
+    {
+        Account account = (accountId != DEFAULT_ACCOUNT_ID) ? transactionService.findAccount(accountId) : null;
+
+        Transaction transaction = new Transaction(account, account, amount, TransactionType.deposit);
+        transactionService.deposit(transaction);
+
+        return "redirect:/transaction/";
     }
 
     @GetMapping("/transaction/reset")
