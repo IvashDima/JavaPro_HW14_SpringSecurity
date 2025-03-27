@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <form role="form" class="form-horizontal" action="/account/add" method="post">
-            <h3>New contact</h3>
+            <h3>New Account</h3>
             <select class="selectpicker form-control form-group" name="client">
                 <option value="-1">Default</option>
                 <c:forEach items="${clients}" var="client">
