@@ -26,18 +26,18 @@
                         <li><button type="button" id="add_account" class="btn btn-default navbar-btn">Add transaction</button></li>
                         <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/transaction/">Default</a></li>
-                                <c:forEach items="${clients}" var="client">
-                                    <li><a href="/client/${client.id}">${client.name}</a></li>
+                                <c:forEach items="${accounts}" var="account">
+                                    <li><a href="/transaction/account/${account.id}">${account.client.name}+${account.currency}</a></li>
                                 </c:forEach>
                             </ul>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search" action="/transaction/search" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="pattern" placeholder="Search by currency">
+                            <input type="text" class="form-control" name="pattern" placeholder="Search by amount">
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>

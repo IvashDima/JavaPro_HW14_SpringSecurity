@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -67,6 +68,14 @@ public class TransactionController {
     public String resetDemoData() {
         demoDataService.generateDemoData();
         return "redirect:/transaction/";
+    }
+
+    @PostMapping(value = "/transaction/search")
+    public String search(@RequestParam String pattern, Model model) {
+        model.addAttribute("accounts", transactionService.findAccounts());
+        model.addAttribute("transactions", transactionService.findByPattern(pattern, null));
+
+        return "transaction/index";
     }
 
     private long getPageCount() {
