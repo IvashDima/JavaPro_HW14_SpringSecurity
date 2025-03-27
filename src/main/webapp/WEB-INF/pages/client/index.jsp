@@ -24,7 +24,7 @@
             <ul id="groupList" class="nav navbar-nav">
               <li><button type="button" id="add_client" class="btn btn-default navbar-btn">Add Client</button></li>
               <li><button type="button" id="delete_client" class="btn btn-default navbar-btn">Delete Client</button></li>
-              <li><button type="button" id="reset" class="btn btn-default navbar-btn">Reset Demo Data</button></li>
+              <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
 <%--              <li class="dropdown">--%>
 <%--                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>--%>
 <%--                <ul class="dropdown-menu">--%>

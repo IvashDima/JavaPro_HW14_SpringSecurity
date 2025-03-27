@@ -104,9 +104,6 @@
         $('#reset').click(function(){
             window.location.href='/account/reset';
         });
-        // $('#transactions').click(function(){
-        //     window.location.href='/transaction/';
-        // });
     </script>
 
 </body>

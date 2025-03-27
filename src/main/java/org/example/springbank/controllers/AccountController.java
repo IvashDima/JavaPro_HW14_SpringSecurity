@@ -4,7 +4,6 @@ import org.example.springbank.enums.CurrencyType;
 import org.example.springbank.models.Account;
 import org.example.springbank.models.Client;
 import org.example.springbank.services.AccountService;
-import org.example.springbank.services.ClientService;
 import org.example.springbank.services.DemoDataService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -81,6 +80,12 @@ public class AccountController {
         Account account = new Account(client, balance, currency);
         accountService.addAccount(account);
 
+        return "redirect:/account/";
+    }
+
+    @GetMapping("/account/reset")
+    public String resetDemoData() {
+        demoDataService.generateDemoData();
         return "redirect:/account/";
     }
 
