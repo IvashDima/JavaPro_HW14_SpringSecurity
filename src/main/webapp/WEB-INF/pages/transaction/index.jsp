@@ -23,7 +23,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul id="groupList" class="nav navbar-nav">
-                        <li><button type="button" id="deposit" class="btn btn-default navbar-btn">Deposit</button></li>
+                        <li><button type="button" id="deposit" class="btn btn-default navbar-btn"><a href="${pageContext.request.contextPath}/transaction/deposit_page/${accountId}">Deposit ${accountId}</a></button></li>
                         <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts <span class="caret"></span></a>

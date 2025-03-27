@@ -16,11 +16,12 @@
 <body>
     <div class="container">
         <form role="form" class="form-horizontal" action="/transaction/deposit" method="post">
-            <h3>New Deposit</h3>
+            <h3>New Deposit for account # ${account.id} in ${account.currency} (${account.client.name})</h3>
             <select class="selectpicker form-control form-group" name="account">
+<%--                <option value="${account}">${account.id}+${account.currency} (${account.client.name})</option>--%>
                 <option value="-1">Default</option>
                 <c:forEach items="${accounts}" var="account">
-                    <option value="${account.id}">${account.client.name}+${account.currency}</option>
+                    <option value="${account.id}">${account.id}+${account.currency} (${account.client.name})</option>
                 </c:forEach>
             </select>
             <input class="form-control form-group" type="text" name="amount" placeholder="Amount">

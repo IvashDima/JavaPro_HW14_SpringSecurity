@@ -67,9 +67,11 @@ public class TransactionController {
         return "transaction/index";
     }
 
-    @GetMapping("/transaction/deposit_page")
-    public String transactionDepositPage(Model model) {
+    @GetMapping("/transaction/deposit_page/{id}")
+    public String transactionDepositPage(Model model,
+                                         @PathVariable(value = "id") long accountId) {
         model.addAttribute("accounts", transactionService.findAccounts());
+        model.addAttribute("account", transactionService.findAccount(accountId));
         return "transaction/deposit_page";
     }
 
