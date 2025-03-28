@@ -87,6 +87,26 @@ public class TransactionController {
         return "redirect:/transaction/";
     }
 
+    @GetMapping("/transaction/transfer_page/{id}")
+    public String transactionTransferPage(Model model,
+                                         @PathVariable(value = "id") long accountId) {
+        model.addAttribute("accounts", transactionService.findAccounts());
+        model.addAttribute("account", transactionService.findAccount(accountId));
+        return "transaction/transfer_page";
+    }
+
+    @PostMapping(value="/transaction/transfer")
+    public String transactionTransfer(@RequestParam(value = "account") long accountId,
+                                     @RequestParam double amount)
+    {
+        Account account = (accountId != DEFAULT_ACCOUNT_ID) ? transactionService.findAccount(accountId) : null;
+
+        Transaction transaction = new Transaction(account, account, amount, TransactionType.deposit);
+        transactionService.deposit(transaction);
+
+        return "redirect:/transaction/";
+    }
+
     @GetMapping("/transaction/reset")
     public String resetDemoData() {
         demoDataService.generateDemoData();
