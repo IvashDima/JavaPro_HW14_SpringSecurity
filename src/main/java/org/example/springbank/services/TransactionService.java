@@ -33,6 +33,17 @@ public class TransactionService {
         accountRepository.save(transaction.getReceiver());
     }
 
+    @Transactional
+    public void transfer(Transaction transaction){
+        transactionRepository.save(transaction);
+
+        transaction.getSender().withdraw(transaction.getAmount());
+        accountRepository.save(transaction.getReceiver());
+
+        transaction.getReceiver().deposit(transaction.getAmount());
+        accountRepository.save(transaction.getReceiver());
+    }
+
     @Transactional(readOnly=true)
     public List<Account> findAccounts() {
         return accountRepository.findAll();
