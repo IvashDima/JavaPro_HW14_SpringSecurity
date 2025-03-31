@@ -16,13 +16,14 @@
 <body>
     <div class="container">
         <form role="form" class="form-horizontal" action="/transaction/transfer" method="post">
-            <h3>New Transfer from account # ${account.id} in ${account.currency} (${account.client.name})</h3>
-
+            <h3>New Transfer from account # ${account.id} (${account.client.name})</h3>
+            <h5>Current balance is ${account.balance} ${account.currency}.</h5>
+            <input type="hidden" name="fromaccount" value="${account.id}">
             <select class="selectpicker form-control form-group" name="account">
 <%--                <option value="${account}">${account.id}+${account.currency} (${account.client.name})</option>--%>
                 <option value="-1">Default</option>
-                <c:forEach items="${accounts}" var="account">
-                    <option value="${account.id}">${account.id}+${account.currency} (${account.client.name})</option>
+                <c:forEach items="${accounts}" var="toaccount">
+                    <option value="${toaccount.id}">${toaccount.id}+${toaccount.currency} (${toaccount.client.name})</option>
                 </c:forEach>
             </select>
             <input class="form-control form-group" type="text" name="amount" placeholder="Amount">

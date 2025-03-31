@@ -20,8 +20,8 @@
             <select class="selectpicker form-control form-group" name="account">
 <%--                <option value="${account}">${account.id}+${account.currency} (${account.client.name})</option>--%>
                 <option value="-1">Default</option>
-                <c:forEach items="${accounts}" var="account">
-                    <option value="${account.id}">${account.id}+${account.currency} (${account.client.name})</option>
+                <c:forEach items="${accounts}" var="fromaccount">
+                    <option value="${fromaccount.id}">${fromaccount.id}+${fromaccount.currency} (${fromaccount.client.name})</option>
                 </c:forEach>
             </select>
             <input class="form-control form-group" type="text" name="amount" placeholder="Amount">

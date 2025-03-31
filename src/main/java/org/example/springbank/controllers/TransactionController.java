@@ -76,7 +76,7 @@ public class TransactionController {
     }
 
     @PostMapping(value="/transaction/deposit")
-    public String transactionDeposit(@RequestParam(value = "account") long accountId,
+    public String transactionDeposit(@RequestParam(value = "fromaccount") long accountId,
                              @RequestParam double amount)
     {
         Account account = (accountId != DEFAULT_ACCOUNT_ID) ? transactionService.findAccount(accountId) : null;
@@ -96,13 +96,15 @@ public class TransactionController {
     }
 
     @PostMapping(value="/transaction/transfer")
-    public String transactionTransfer(@RequestParam(value = "account") long accountId,
-                                     @RequestParam double amount)
+    public String transactionTransfer(@RequestParam(value = "fromaccount") long fromAccountId,
+                                      @RequestParam(value = "toaccount") long toAccountId,
+                                      @RequestParam double amount)
     {
-        Account account = (accountId != DEFAULT_ACCOUNT_ID) ? transactionService.findAccount(accountId) : null;
+        Account fromAccount = (fromAccountId != DEFAULT_ACCOUNT_ID) ? transactionService.findAccount(fromAccountId) : null;
+        Account toAccount = (toAccountId != DEFAULT_ACCOUNT_ID) ? transactionService.findAccount(toAccountId) : null;
 
-        Transaction transaction = new Transaction(account, account, amount, TransactionType.deposit);
-        transactionService.deposit(transaction);
+        Transaction transaction = new Transaction(fromAccount, toAccount, amount, TransactionType.transfer);
+        transactionService.transfer(transaction);
 
         return "redirect:/transaction/";
     }
