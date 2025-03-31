@@ -9,21 +9,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Transactions</title>
+    <title>Account page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h3><img height="50" width="55" src="<c:url value="/static/logo.png"/>"/><a href="/account/transaction/">Transactions List</a></h3>
+        <h3><img height="50" width="55" src="<c:url value="/static/logo.png"/>"/><a href="/account/transaction/">
+            Account # ${id}. Transactions List:</a></h3>
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul id="groupList" class="nav navbar-nav">
-                        <li><button type="button" id="deposit" class="btn btn-default navbar-btn"><a href="${pageContext.request.contextPath}/transaction/deposit_page/${accountId}">Deposit ${accountId}</a></button></li>
+                        <li><button type="button" id="deposit" class="btn btn-default navbar-btn">
+                            <a href="${pageContext.request.contextPath}/transaction/deposit_page/${accountId}">Deposit to ${accountId}</a></button></li>
+                        <li><button type="button" id="transfer" class="btn btn-default navbar-btn">
+                            <a href="${pageContext.request.contextPath}/transaction/transfer_page/${accountId}">Transfer from ${accountId}</a></button></li>
                         <li><button type="button" id="reset" class="btn btn-default navbar-btn" onclick="fetch('reset').then(() => alert('Demo data has been reset!'))">Reset Demo Data</button></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Accounts <span class="caret"></span></a>
