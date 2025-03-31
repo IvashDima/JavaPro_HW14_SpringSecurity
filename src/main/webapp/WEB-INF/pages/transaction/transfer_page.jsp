@@ -17,16 +17,19 @@
     <div class="container">
         <form role="form" class="form-horizontal" action="/transaction/transfer" method="post">
             <h3>New Transfer from account # ${account.id} (${account.client.name})</h3>
-            <h5>Current balance is ${account.balance} ${account.currency}.</h5>
+            <h4>Current balance is ${account.balance} ${account.currency}.</h4>
             <input type="hidden" name="fromaccount" value="${account.id}">
-            <select class="selectpicker form-control form-group" name="account">
+            <p></p>
+            <label for="toaccount">Account of receiver:</label>
+            <select id="toaccount" class="selectpicker form-control form-group" name="toaccount">
 <%--                <option value="${account}">${account.id}+${account.currency} (${account.client.name})</option>--%>
-                <option value="-1">Default</option>
+                <option value="-1" disabled selected>Choose account</option>
                 <c:forEach items="${accounts}" var="toaccount">
                     <option value="${toaccount.id}">${toaccount.id}+${toaccount.currency} (${toaccount.client.name})</option>
                 </c:forEach>
             </select>
-            <input class="form-control form-group" type="text" name="amount" placeholder="Amount">
+            <label for="amount">Amount of transfer:</label>
+            <input id="amount" class="form-control form-group" type="text" name="amount" placeholder="Enter amount">
             <input type="submit" class="btn btn-primary" value="Confirm">
         </form>
     </div>
