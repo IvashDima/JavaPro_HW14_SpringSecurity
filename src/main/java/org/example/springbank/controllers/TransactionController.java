@@ -84,7 +84,7 @@ public class TransactionController {
         Transaction transaction = new Transaction(account, account, amount, TransactionType.deposit);
         transactionService.deposit(transaction);
 
-        return "redirect:/transaction/";
+        return "redirect:/transaction/account/" + accountId;
     }
 
     @GetMapping("/transaction/transfer_page/{id}")
@@ -106,7 +106,7 @@ public class TransactionController {
         Transaction transaction = new Transaction(fromAccount, toAccount, amount, TransactionType.transfer);
         transactionService.transfer(transaction);
 
-        return "redirect:/transaction/";
+        return "redirect:/transaction/account/" + fromAccountId;
     }
 
     @GetMapping("/transaction/reset")
