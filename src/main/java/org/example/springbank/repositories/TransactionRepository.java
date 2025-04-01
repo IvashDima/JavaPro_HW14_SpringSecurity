@@ -15,8 +15,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT c FROM Transaction c WHERE LOWER(c.amount) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Transaction> findByPattern(@Param("pattern") String pattern, Pageable pageable);
 
-    @Query("SELECT c FROM Transaction c WHERE c.sender = :senderAccount OR c.receiver = :receiverAccount")
-    List<Transaction> findByAnyAccount(@Param("senderAccount") Account senderAccount, @Param("receiverAccount") Account receiverAccount, Pageable pageable);
+    @Query("SELECT c FROM Transaction c WHERE c.sender = :account OR c.receiver = :account")
+    List<Transaction> findByAnyAccount(@Param("account") Account account, Pageable pageable);
 
     @Query("SELECT c FROM Transaction c WHERE c.sender = :senderAccount")
     List<Transaction> findBySenderAccount(@Param("senderAccount") Account senderAccount, Pageable pageable);

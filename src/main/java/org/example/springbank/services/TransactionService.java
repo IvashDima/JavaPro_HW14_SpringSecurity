@@ -66,7 +66,7 @@ public class TransactionService {
 
     @Transactional(readOnly=true)
     public List<Transaction> findByAnyAccount(Account account, Pageable pageable) {
-        return transactionRepository.findByAnyAccount(account, account, pageable);
+        return transactionRepository.findByAnyAccount(account, pageable);
     }
 
     @Transactional(readOnly=true)

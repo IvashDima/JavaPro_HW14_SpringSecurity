@@ -57,11 +57,11 @@ public class TransactionController {
         if (page < 0) page = 0;
 
         List<Transaction> transactions = transactionService
-                .findByReceiverAccount(account, PageRequest.of(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+                .findByAnyAccount(account, PageRequest.of(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
 
         model.addAttribute("accounts", transactionService.findAccounts());
         model.addAttribute("transactions", transactions);
-        model.addAttribute("byReceiverAccountPages", getPageCount(account));
+        model.addAttribute("byAccountPages", getPageCount(account));
         model.addAttribute("accountId", accountId);
 
         return "transaction/index";

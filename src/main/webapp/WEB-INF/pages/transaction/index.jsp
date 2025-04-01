@@ -92,8 +92,8 @@
                         <li><a href="/transaction/?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
-                <c:if test="${byReceiverAccountPages ne null}">
-                    <c:forEach var="i" begin="1" end="${byReceiverAccountPages}">
+                <c:if test="${byAccountPages ne null}">
+                    <c:forEach var="i" begin="1" end="${byAccountPages}">
                         <li><a href="/transaction/client/${clientId}?page=<c:out value="${i - 1}"/>"><c:out value="${i}"/></a></li>
                     </c:forEach>
                 </c:if>
