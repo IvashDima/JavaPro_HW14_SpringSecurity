@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -21,7 +21,7 @@
 
         <p><a href="/register">Register new user</a></p>
 
-        <c:if test="${param.error ne null}">
+        <c:if test="${param.error != null}">
             <p>Wrong login or password!</p>
         </c:if>
 
