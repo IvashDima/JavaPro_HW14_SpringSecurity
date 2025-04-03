@@ -33,20 +33,24 @@ public class DemoDataService {
         accountService.deleteAllAccounts();
         transactionService.deleteAllTransactions();
 
+        Client clientadmin = new Client(ADMIN_LOGIN, ADMIN_LOGIN, "1234567", ADMIN_LOGIN + "@test.com");
+        clientService.addClient(clientadmin);
         userService.addUser(ADMIN_LOGIN,
                 encoder.encode("password"),
-                UserRole.ADMIN, "", "", "");
+                UserRole.ADMIN, clientadmin,ADMIN_LOGIN + "@test.com", "1234567", "");
 
         Client client;
         Account account;
         Transaction transaction;
 
-        for (int i = 0; i < 2; i++) {
-            userService.addUser("usrlogin" + i,
-                    encoder.encode("password"),
-                    UserRole.USER, "", "", "");
-            client = new Client("ClientName" + i, "ClientSurname" + i, "1234567" + i, "clientmail" + i + "@test.com");
+        for (int i = 1; i < 3; i++) {
+            client = new Client("Name" + i, "Surname" + i, "1234567" + i, "user" + i + "@test.com");
             clientService.addClient(client);
+
+            userService.addUser("user" + i,
+                    encoder.encode("password"),
+                    UserRole.USER, client,"user" + i + "@test.com", "1234567" + i, "");
+
             for (CurrencyType currencyType : CurrencyType.values()){
                 account = new Account(client, 0, currencyType);
                 accountService.addAccount(account);

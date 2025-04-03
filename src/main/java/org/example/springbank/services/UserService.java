@@ -1,7 +1,7 @@
 package org.example.springbank.services;
 
-import org.example.springbank.config.AppConfig;
 import org.example.springbank.enums.UserRole;
+import org.example.springbank.models.Client;
 import org.example.springbank.models.CustomUser;
 import org.example.springbank.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -42,15 +42,31 @@ public class UserService {
 
     @Transactional
     public boolean addUser(String login, String passHash,
-                           UserRole role, String email,
-                           String phone,
+                           UserRole role, Client client, //String name, String surname,
+                           String email, String phone,
                            String address) {
         if (userRepository.existsByLogin(login))
             return false;
 
-        CustomUser user = new CustomUser(login, passHash, role, email, phone, address);
-        userRepository.save(user);
+//        Client client = new Client();
+//        client.setName(name);
+//        client.setSurname(surname);
+//        client.setEmail(email);
+//        client.setPhone(phone);
+//
+//        CustomUser user = new CustomUser();
+//        user.setLogin(login);
+//        user.setPassword(passHash);
+//        user.setRole(role);
+//        user.setClient(client);
+//        user.setEmail(email);
+//        user.setPhone(phone);
+//        user.setAddress(address);
 
+//        Client client = new Client(name,surname, email, phone);
+        CustomUser user = new CustomUser(login, passHash, role, client, email, phone, address);
+
+        userRepository.save(user);
         return true;
     }
 

@@ -1,7 +1,9 @@
 package org.example.springbank.controllers;
 
 import org.example.springbank.enums.UserRole;
+import org.example.springbank.models.Client;
 import org.example.springbank.models.CustomUser;
+import org.example.springbank.services.ClientService;
 import org.example.springbank.services.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,10 +23,12 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final ClientService clientService;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, ClientService clientService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.clientService = clientService;
     }
 
     @GetMapping("/")
@@ -59,6 +63,8 @@ public class UserController {
     @PostMapping(value = "/newuser")
     public String update(@RequestParam String login,
                          @RequestParam String password,
+                         @RequestParam String name,
+                         @RequestParam String surname,
                          @RequestParam(required = false) String email,
                          @RequestParam(required = false) String phone,
                          @RequestParam(required = false) String address,
@@ -68,7 +74,13 @@ public class UserController {
         //if (password.length() < 8)
         //    return "error";
 
-        if ( ! userService.addUser(login, passHash, UserRole.USER, email, phone, address)) {
+        Client client = new Client();
+        client.setName(name);
+        client.setSurname(surname);
+        client.setEmail(email);
+        client.setPhone(phone);
+
+        if ( ! userService.addUser(login, passHash, UserRole.USER, client, email, phone, address)) {
             model.addAttribute("exists", true);
             model.addAttribute("login", login);
             return "register";

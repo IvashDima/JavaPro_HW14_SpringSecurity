@@ -21,6 +21,9 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Account> account = new ArrayList<>();
 
+    @OneToOne(mappedBy = "client", fetch = FetchType.LAZY) //cascade = CascadeType.ALL, orphanRemoval = true
+    private CustomUser user;
+
     public Client(){}
 
     public Client(String name, String surname, String phone, String email){
@@ -67,6 +70,17 @@ public class Client {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setUser(CustomUser user) {
+        this.user = user;
+        if (user != null) {
+            user.setClient(this);
+        }
+    }
+
+    public CustomUser getUser() {
+        return user;
     }
 
     @Override

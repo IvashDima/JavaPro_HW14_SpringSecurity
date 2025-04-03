@@ -17,6 +17,8 @@
     <form action="newuser" method="POST">
         Login:<br/><input type="text" name="login" value="${login}"><br/>
         Password:<br/><input type="password" name="password"><br/>
+        First name:<br/><input type="name" name="name"><br/>
+        Surname:<br/><input type="surname" name="surname"><br/>
         E-mail:<br/><input type="text" name="email"><br/>
         Phone:<br/><input type="text" name="phone"><br/>
         Address:<br/><input type="text" name="address"><br/>
