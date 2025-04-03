@@ -46,11 +46,12 @@ public class UserController {
 
     @PostMapping(value = "/update")
     public String update(@RequestParam(required = false) String email,
-                         @RequestParam(required = false) String phone) {
+                         @RequestParam(required = false) String phone,
+                         @RequestParam(required = false) String address) {
         User user = getCurrentUser();
 
         String login = user.getUsername();
-        userService.updateUser(login, email, phone);
+        userService.updateUser(login, email, phone, address);
 
         return "redirect:/";
     }

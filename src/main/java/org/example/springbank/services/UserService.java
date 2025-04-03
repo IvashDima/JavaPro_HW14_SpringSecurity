@@ -33,7 +33,7 @@ public class UserService {
         ids.forEach(id -> {
             Optional<CustomUser> user = userRepository.findById(id);
             user.ifPresent(u -> {
-                if ( ! AppConfig.ADMIN_LOGIN.equals(u.getLogin())) {
+                if ( ! DemoDataService.ADMIN_LOGIN.equals(u.getLogin())) {
                     userRepository.deleteById(u.getId());
                 }
             });
@@ -55,13 +55,14 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(String login, String email, String phone) {
+    public void updateUser(String login, String email, String phone, String address) {
         CustomUser user = userRepository.findByLogin(login);
         if (user == null)
             return;
 
         user.setEmail(email);
         user.setPhone(phone);
+        user.setAddress(address);
 
         userRepository.save(user);
     }

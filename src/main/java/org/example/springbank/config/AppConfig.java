@@ -16,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AppConfig extends GlobalMethodSecurityConfiguration implements WebMvcConfigurer {
 
-    public static final String ADMIN_LOGIN = "admin";
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
@@ -31,15 +30,7 @@ public class AppConfig extends GlobalMethodSecurityConfiguration implements WebM
             @Override
             public void run(String... strings) throws Exception {
 
-                userService.addUser(ADMIN_LOGIN,
-                        encoder.encode("password"),
-                        UserRole.ADMIN, "", "", "");
-                userService.addUser("user",
-                        encoder.encode("password"),
-                        UserRole.USER, "", "", "");
-
                 demoDataService.generateDemoData();
-
             }
         };
     }
