@@ -10,7 +10,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Prog.kiev.ua</title>
+    <title>Wellcome page</title>
 </head>
 <body>
 <div align="center">
@@ -27,7 +27,8 @@
         E-mail:<br/><input type="text" name="email" value="${email}" /><br/>
         Phone:<br/><input type="text" name="phone" value="${phone}" /><br/>
         Address:<br/><input type="text" name="address" value="${address}" /><br/>
-        <input type="submit" value="Update" />
+        <input type="submit" value="update"/>
+<%--        <button type="submit" value="update">Submit</button>--%>
     </form>
 
     <p>Click to logout: <a href="/logout">LOGOUT</a></p>
